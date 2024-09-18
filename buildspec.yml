@@ -7,38 +7,34 @@ variables:
   CLUSTER_NAME: laravel-rds
   SERVICE_NAME: ser-Laravel-ECR-ECS
 
-before_script:
+pre_build:
+  commands:
   - apk update
   - apk add --no-cache curl jq py-pip
   - apk add --no-cache python3
   - ln -sf python3 /usr/bin/python
   - pip install awscli
   - IMAGE_TAG="$CI_COMMIT_SHA"
-stages:
-  - build
-  - deploy
 
 build_stage:
-  stage: build
-
-  script:
-    - echo "test-1"
-    - mkdir -p .docker/deploy/tmp
-    - cp .docker/php/php-dev.ini .docker/deploy/tmp/php.ini 
-    - cp .docker/php/www.overrides.conf .docker/deploy/tmp/www.overrides.conf  
-    - cp .docker/nginx/nginx.conf .docker/deploy/tmp/nginx.conf  
-    - cp .docker/nginx/default .docker/deploy/tmp/default  
-    - cp .docker/supervisord/supervisord.conf .docker/deploy/tmp/supervisord.conf  
-    - cp .docker/cron/cron.yml .docker/deploy/tmp/cron.yml  
-    - cp .docker/cron/cron.production.yml .docker/deploy/tmp/cron.production.yml  
-    - echo "test-2"
-    - docker build --build-arg ARG_ENV=stage -t $REPOSITORY_URL:latest -f .docker/deploy/Dockerfile .
-    - docker tag $REPOSITORY_URL:latest $REPOSITORY_URL:$IMAGE_TAG
-    - echo "test-3"
-    - aws sts get-caller-identity
-    - aws ecr get-login-password --region "${AWS_DEFAULT_REGION}" | docker login --username AWS --password-stdin "${ECR_ID}"
-    - docker push $REPOSITORY_URL:latest  
-    - echo "test-4"
+  commands:
+   - echo "test-1"
+   - mkdir -p .docker/deploy/tmp
+   - cp .docker/php/php-dev.ini .docker/deploy/tmp/php.ini 
+   - cp .docker/php/www.overrides.conf .docker/deploy/tmp/www.overrides.conf  
+   - cp .docker/nginx/nginx.conf .docker/deploy/tmp/nginx.conf  
+   - cp .docker/nginx/default .docker/deploy/tmp/default  
+   - cp .docker/supervisord/supervisord.conf .docker/deploy/tmp/supervisord.conf  
+   - cp .docker/cron/cron.yml .docker/deploy/tmp/cron.yml  
+   - cp .docker/cron/cron.production.yml .docker/deploy/tmp/cron.production.yml  
+   - echo "test-2"
+   - docker build --build-arg ARG_ENV=stage -t $REPOSITORY_URL:latest -f .docker/deploy/Dockerfile .
+   - docker tag $REPOSITORY_URL:latest $REPOSITORY_URL:$IMAGE_TAG
+   - echo "test-3"
+   - aws sts get-caller-identity
+   - aws ecr get-login-password --region "${AWS_DEFAULT_REGION}" | docker login --username AWS --password-stdin "${ECR_ID}"
+   - docker push $REPOSITORY_URL:latest  
+   - echo "test-4"
 
   artifacts:
   files:
