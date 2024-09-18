@@ -10,7 +10,7 @@ phases:
   pre_build:
     commands:
       - echo "Logging in to Amazon ECR"
-      - $(aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 645095421007.dkr.ecr.us-east-1.amazonaws.com)
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 645095421007.dkr.ecr.us-east-1.amazonaws.com
       - echo "Pulling latest image"
       - docker pull $645095421007.dkr.ecr.us-east-1.amazonaws.com/laravel_rds:latest || true
 
