@@ -22,6 +22,7 @@ build_stage:
   stage: build
 
   script:
+    - echo "test-1"
     - mkdir -p .docker/deploy/tmp
     - cp .docker/php/php-dev.ini .docker/deploy/tmp/php.ini 
     - cp .docker/php/www.overrides.conf .docker/deploy/tmp/www.overrides.conf  
@@ -30,12 +31,14 @@ build_stage:
     - cp .docker/supervisord/supervisord.conf .docker/deploy/tmp/supervisord.conf  
     - cp .docker/cron/cron.yml .docker/deploy/tmp/cron.yml  
     - cp .docker/cron/cron.production.yml .docker/deploy/tmp/cron.production.yml  
+    - echo "test-2"
     - docker build --build-arg ARG_ENV=stage -t $REPOSITORY_URL:latest -f .docker/deploy/Dockerfile .
     - docker tag $REPOSITORY_URL:latest $REPOSITORY_URL:$IMAGE_TAG
+    - echo "test-3"
     - aws sts get-caller-identity
     - aws ecr get-login-password --region "${AWS_DEFAULT_REGION}" | docker login --username AWS --password-stdin "${ECR_ID}"
     - docker push $REPOSITORY_URL:$IMAGE_TAG
-
+    - echo "test-4"
 
 deploy_stage:
   stage: deploy
