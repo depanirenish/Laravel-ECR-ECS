@@ -34,4 +34,4 @@ artifacts:
   files:
     - '**/*'                # Include all files as artifacts
   discard-paths: yes         # Discard directory structure when uploading to S3
-  base-directory: dist/      # Specify the base directory where the build output is located
+  base-directory: build/      # Specify the base directory where the build output is located
