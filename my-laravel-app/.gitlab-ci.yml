@@ -1,0 +1,33 @@
+# .gitlab-ci.yml
+
+stages:
+  - prepare
+  - test
+
+variables:
+  MYSQL_DATABASE: laravel
+  MYSQL_USER: root
+  MYSQL_PASSWORD: kunj123
+  DB_HOST: mysql
+  DB_PORT: 3306
+
+services:
+  - mysql:5.7
+
+before_script:
+  - apt-get update && apt-get install -y unzip
+  - cp .env.example .env
+  - composer install --prefer-dist --no-scripts --no-interaction
+  - php artisan key:generate
+  - php artisan config:clear
+
+prepare:
+  stage: prepare
+  script:
+    - echo "Preparing for tests"
+    - php artisan migrate --force
+
+test:
+  stage: test
+  script:
+    - php artisan test
