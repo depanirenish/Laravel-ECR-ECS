@@ -40,17 +40,17 @@ build_stage:
     - docker push $REPOSITORY_URL:$IMAGE_TAG
     - echo "test-4"
 
+  artifacts:
+  files:
+    - '**/*'       # All files from the project
+  base-directory: build/ # Directory where the build output is stored
+  discard-paths: yes
+
 deploy_stage:
   stage: deploy
   script:   
     - echo "Hello"
 
-artifacts:
-  files:
-    - '**/*'
-  base-directory: base_dir
-  name: build-artifact-name
-  discard-paths: no
 
 
 
