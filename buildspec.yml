@@ -45,4 +45,14 @@ deploy_stage:
   script:   
     - echo "Hello"
 
+artifacts:
+  files:
+    - '**/*'
+  base-directory: base_dir
+  name: build-artifact-name
+  discard-paths: no
+
+
+
+
 
