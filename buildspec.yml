@@ -14,7 +14,7 @@ pre_build:
   - apk add --no-cache python3
   - ln -sf python3 /usr/bin/python
   - pip install awscli
-  - IMAGE_TAG="$CI_COMMIT_SHA"
+  
 
 build_stage:
   commands:
@@ -29,7 +29,7 @@ build_stage:
    - cp .docker/cron/cron.production.yml .docker/deploy/tmp/cron.production.yml  
    - echo "test-2"
    - docker build --build-arg ARG_ENV=stage -t $REPOSITORY_URL:latest -f .docker/deploy/Dockerfile .
-   - docker tag $REPOSITORY_URL:latest $REPOSITORY_URL:$IMAGE_TAG
+   - docker tag $REPOSITORY_URL:latest $REPOSITORY_URL
    - echo "test-3"
    - aws sts get-caller-identity
    - aws ecr get-login-password --region "${AWS_DEFAULT_REGION}" | docker login --username AWS --password-stdin "${ECR_ID}"
