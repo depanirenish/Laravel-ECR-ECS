@@ -18,7 +18,4 @@ phases:
   post_build:
     commands:
       - echo "Pushing the Docker image to ECR"
-      
-  artifacts:
-  files:
-    - '**/*'
+   
