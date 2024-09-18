@@ -37,7 +37,7 @@ build_stage:
     - echo "test-3"
     - aws sts get-caller-identity
     - aws ecr get-login-password --region "${AWS_DEFAULT_REGION}" | docker login --username AWS --password-stdin "${ECR_ID}"
-    - docker push $REPOSITORY_URL:$IMAGE_TAG
+    - docker push $REPOSITORY_URL:latest  
     - echo "test-4"
 
   artifacts:
