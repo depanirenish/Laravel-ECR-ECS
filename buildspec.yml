@@ -15,11 +15,7 @@ phases:
   pre_build:
     commands:
       - echo Running pre-build steps...
-      - - apk update
-      - apk add --no-cache curl jq py-pip
-      - apk add --no-cache python3
-      - ln -sf python3 /usr/bin/python
-      - pip install awscli
+      - echo Hello-0
   
   build:
     commands:
