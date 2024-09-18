@@ -1,16 +1,10 @@
 version: 0.2
 
-variables:
-  ECR_ID: 645095421007.dkr.ecr.us-east-1.amazonaws.com
-  REPOSITORY_URL: 645095421007.dkr.ecr.us-east-1.amazonaws.com/laravel_rds
-  TASK_DEFINITION_NAME: Taskdef-laravel-rds
-  CLUSTER_NAME: laravel-rds
-  SERVICE_NAME: ser-Laravel-ECR-ECS
-
 phases:
   install:
     commands:
       - echo Installing dependencies...
+      - apt-get update && apt-get install -y docker
       
   pre_build:
     commands:
@@ -34,4 +28,4 @@ artifacts:
   files:
     - '**/*'                # Include all files as artifacts
   discard-paths: yes         # Discard directory structure when uploading to S3
-  base-directory: build/      # Specify the base directory where the build output is located
+  #base-directory: build/      # Specify the base directory where the build output is located
