@@ -39,6 +39,8 @@ phases:
       - echo "Pushing the Docker image to ECR"
       - echo "docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPOSITORY_URL:latest"
       - echo "Updating ECS service"
+      - echo Hello-5
       - aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment
+      - echo Hello-6
 
 
