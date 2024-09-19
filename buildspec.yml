@@ -28,15 +28,17 @@ phases:
       - echo Hello-2
   build:
     commands:
-      - echo Building the application...
-      - echo Hello-1
+      - echo "Building the Docker image"
+      - docker build -t $REPOSITORY_URL .
+      - echo Hello-3
+      - docker tag $REPOSITORY_URL:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPOSITORY_URL:latest
+      - echo Hello-4
+
       
   post_build:
     commands:
-      - echo Running post-build steps...
-      
-      - echo Build and tests complete.
-
-      - echo Hello-2
+      - echo "Pushing the Docker image to ECR"
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPOSITORY_URL:latest
+      - echo Hello-5
 
 
