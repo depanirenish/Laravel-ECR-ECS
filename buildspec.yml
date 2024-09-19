@@ -7,6 +7,9 @@ env:
     TASK_DEFINITION_NAME: Taskdef-laravel-rds
     CLUSTER_NAME: laravel-rds
     SERVICE_NAME: ser-Laravel-ECR-ECS
+    AWS_ACCOUNT_ID: 645095421007
+    AWS_DEFAULT_REGION: us-east-1
+    
 
 phases:
   install:
