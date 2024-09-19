@@ -1,11 +1,12 @@
 version: 0.2
 
-variables:
-  ECR_ID: 645095421007.dkr.ecr.us-east-1.amazonaws.com
-  REPOSITORY_URL: 645095421007.dkr.ecr.us-east-1.amazonaws.com/laravel_rds
-  TASK_DEFINITION_NAME: Taskdef-laravel-rds
-  CLUSTER_NAME: laravel-rds
-  SERVICE_NAME: ser-Laravel-ECR-ECS
+env:
+  variables:
+    ECR_ID: 645095421007.dkr.ecr.us-east-1.amazonaws.com
+    REPOSITORY_URL: 645095421007.dkr.ecr.us-east-1.amazonaws.com/laravel_rds
+    TASK_DEFINITION_NAME: Taskdef-laravel-rds
+    CLUSTER_NAME: laravel-rds
+    SERVICE_NAME: ser-Laravel-ECR-ECS
 
 phases:
   install:
@@ -20,8 +21,7 @@ phases:
       - echo Hello-0
       - echo $AWS_DEFAULT_REGION
       - echo $ECR_ID
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 645095421007.dkr.ecr.us-east-1.amazonaws.com
-      # aws ecr get-login-password --region "${AWS_DEFAULT_REGION}" | docker login --username AWS --password-stdin "${ECR_ID}"
+      - aws ecr get-login-password --region "${AWS_DEFAULT_REGION}" | docker login --username AWS --password-stdin "${ECR_ID}"
       - echo Hello-1
       - docker build -t laravel_rds .
       - echo Hello-2
