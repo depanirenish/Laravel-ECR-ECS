@@ -24,8 +24,4 @@ phases:
 
       - echo Hello-2
 
-artifacts:
-  files:
-    - '**/*'                # Include all files as artifacts
-  discard-paths: yes         # Discard directory structure when uploading to S3
-  #base-directory: build/      # Specify the base directory where the build output is located
+
