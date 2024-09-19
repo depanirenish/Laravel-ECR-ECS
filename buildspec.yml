@@ -23,13 +23,9 @@ phases:
       - echo $ECR_ID
       - aws ecr get-login-password --region "${AWS_DEFAULT_REGION}" | docker login --username AWS --password-stdin "${ECR_ID}"
       - echo Hello-1
-      - docker build -t laravel_rds .
+      - echo "Pulling latest image"
+      - docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPOSITORY_URL:latest || true
       - echo Hello-2
-      - docker tag laravel_rds:latest 645095421007.dkr.ecr.us-east-1.amazonaws.com/laravel_rds:latest
-      - echo Hello-3
-      - docker push $REPOSITORY_URL:latest
-      - echo Hello-4
-  
   build:
     commands:
       - echo Building the application...
