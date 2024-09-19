@@ -18,6 +18,8 @@ phases:
     commands:
       - echo Running pre-build steps...
       - echo Hello-0
+      - echo $AWS_DEFAULT_REGION
+      - echo $ECR_ID
       - aws ecr get-login-password --region "${AWS_DEFAULT_REGION}" | docker login --username AWS --password-stdin "${ECR_ID}"
       - echo Hello-1
       - docker build -t laravel_rds .
