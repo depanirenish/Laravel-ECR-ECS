@@ -20,7 +20,8 @@ phases:
       - echo Hello-0
       - echo $AWS_DEFAULT_REGION
       - echo $ECR_ID
-      - aws ecr get-login-password --region "${AWS_DEFAULT_REGION}" | docker login --username AWS --password-stdin "${ECR_ID}"
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 645095421007.dkr.ecr.us-east-1.amazonaws.com
+      # aws ecr get-login-password --region "${AWS_DEFAULT_REGION}" | docker login --username AWS --password-stdin "${ECR_ID}"
       - echo Hello-1
       - docker build -t laravel_rds .
       - echo Hello-2
