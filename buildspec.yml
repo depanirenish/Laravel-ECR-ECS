@@ -18,6 +18,7 @@ phases:
       - echo Installing dependencies...
       - apt-get update && apt-get install -y docker
       - pip3 install awscli
+      - cp ./my-laravel-app/.env.example ./my-laravel-app/.env
       
   pre_build:
     commands:
