@@ -33,15 +33,15 @@ phases:
   build:
     commands:
       - echo "Building the Docker image"
-      - echo Hello-3
-      - docker tag $REPOSITORY_URL:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPOSITORY_URL:latest
+      - docker build -t $ECR_REPOSITORY .
+      - docker tag $ECR_REPOSITORY:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPOSITORY:latest
       - echo Hello-4
 
       
   post_build:
     commands:
       - echo "Pushing the Docker image to ECR"
-      - echo "docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPOSITORY_URL:latest"
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPOSITORY:latest
       - echo "Updating ECS service"
       - echo Hello-5
       - aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment
