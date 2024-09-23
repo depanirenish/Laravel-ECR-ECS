@@ -36,7 +36,7 @@ phases:
       - echo "Building the Docker image"
       - docker build -t $ECR_REPOSITORY .
       - docker tag $ECR_REPOSITORY:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPOSITORY:latest
-      - echo Hello-4
+      - echo Hello-3
 
       
   post_build:
