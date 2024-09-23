@@ -33,6 +33,7 @@ WORKDIR /var/www/html/my-laravel-app
 
 # Install Laravel dependencies using Composer
 RUN composer install
+RUN php artisan key:generate
 RUN php artisan migrate --force
 
 # Run PHP artisan serve on port 22111
