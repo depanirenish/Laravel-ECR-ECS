@@ -46,5 +46,5 @@ phases:
       - echo "Updating ECS service"
       - echo Hello-5
       - aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment
-      - echo Hello-8
+      - echo Hello-9
 
